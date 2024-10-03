@@ -1,0 +1,18 @@
+[
+    {
+        "id":"1",
+        "categoria":"Projeto"
+    },
+    {
+        "id":"2",
+        "categoria":"Viagem"
+    },
+    {
+        "id":"3",
+        "categoria":"Evento"
+    },
+    {
+        "id":"4",
+        "categoria":"Rotina"
+    }
+]
