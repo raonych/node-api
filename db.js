@@ -25,3 +25,9 @@ const postagem = con.define("postagens",{
 
 
 //postagem.sync({force: true});
+
+postagem.create({
+titulo: "Um titulo qualquer",
+conteudo: "Um conteudo qualquer",
+});
+
