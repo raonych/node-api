@@ -1,11 +1,3 @@
-/*var http = require("http");
-
-http.createServer(function (req, res) {
-    res.end("Hello World");
-  }).listen(3300);
-
-console.log("Server is running on port 3300");*/
-
 //Criando uma variável com os poderes de Express que é um gerenciador de rotas
 const express = require("express");
 const {create} = require("express-handlebars");  
