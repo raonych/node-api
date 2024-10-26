@@ -83,6 +83,7 @@ rotas.get("/", function(req, res){
 });
 
 rotas.get("/cadastrar/:user_nome/:user_email/:user_senha", async function(req, res){
+    try{
     const {user_nome,user_email,user_senha} = req.params; //Guarda os parametros em variaveis
 
     const novoUsuario = await Usuario.create({user_nome,user_email,user_senha});// insert
@@ -91,13 +92,21 @@ rotas.get("/cadastrar/:user_nome/:user_email/:user_senha", async function(req, r
         resposta: "Usuário cadastrado com sucesso", 
         usuario: novoUsuario
     })
+    }catch(error){
+        res.status(500).json({ message: `Erro ao cadastrar usuario: ${error}` });
+    }
 });
 rotas.get("/exibir", async function (req, res) {
+    try{
     const usuarios = await Usuario.findAll(); // Busca todos os registros
     res.json(usuarios); // Retorna os registros em formato JSON
+    }catch(error){
+        res.status(500).json({ message: `Erro ao buscar usuarios: ${error}` });
+    }
   });
 
 rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
+    try{
     const { id, user_nome, user_email } = req.params;
     const idNumber = parseInt(id, 10); // Converte o ID para número
   
@@ -111,10 +120,14 @@ rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
     res.json({
       mensagem: "Usuario atualizado com sucesso",
     });
+    }catch(error){
+        res.status(500).json({ message: `Erro ao buscar usuario: ${error}` });
+    }
   });
   
 // Deletar usuario via ID
   rotas.get("/deletar/:id", async function (req, res) {
+    try{
     const { id } = req.params;
     const idNumber = parseInt(id, 10); // Converte o ID para número
   
@@ -126,6 +139,9 @@ rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
       res.json({ mensagem: "Usuario deletado com sucesso" });
     } else {
       res.status(404).json({ mensagem: "Usuario não encontrado" });
+    }
+    }catch(error){
+        res.status(500).json({ message: `Erro ao deletar usuario: ${error}` });
     }
   });
 
