@@ -21,7 +21,6 @@ const Usuario = con.define("usuarios",{
     }
 })
 
-
 const Categorias = con.define("categorias",{
     ctg_titulo: {
         type: Sequelize.STRING,
@@ -79,8 +78,6 @@ con.authenticate().then(function(){
     console.log("Erro ao conectar com o banco de dados" + err);
 })
 
-
-
 rotas.get("/", function(req, res){
     res.send("Rota Principal");
 });
@@ -100,8 +97,6 @@ rotas.get("/exibir", async function (req, res) {
     res.json(usuarios); // Retorna os registros em formato JSON
   });
 
-
-
 rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
     const { id, user_nome, user_email } = req.params;
     const idNumber = parseInt(id, 10); // Converte o ID para número
@@ -118,17 +113,14 @@ rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
     });
   });
   
-
-
-
-  // Deletar aluno via ID
+// Deletar usuario via ID
   rotas.get("/deletar/:id", async function (req, res) {
     const { id } = req.params;
     const idNumber = parseInt(id, 10); // Converte o ID para número
   
     const deleted = await Usuario.destroy({
       where: { id: idNumber },
-    });
+    }); 
   
     if (deleted) {
       res.json({ mensagem: "Usuario deletado com sucesso" });
@@ -136,7 +128,6 @@ rotas.get("/editar/:id/:user_nome/:user_email", async function (req, res) {
       res.status(404).json({ mensagem: "Usuario não encontrado" });
     }
   });
-
 
 rotas.listen(3001, function () {
     console.log("Server is running on port 3001");
